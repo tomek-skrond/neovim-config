@@ -17,7 +17,18 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      dependencies = {
+        {
+          "folke/neoconf.nvim",
+          cmd = "Neoconf",
+          opts = {},
+        },
+      },
+    },
+    { import = "lazyvim.plugins.extras.lsp.neoconf" },
     -- import/override with your plugins
     { import = "plugins" },
   },
@@ -42,7 +53,7 @@ require("lazy").setup({
         "gzip",
         -- "matchit",
         -- "matchparen",
-        -- "netrwPlugin",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         -- "tutor",
@@ -50,10 +61,4 @@ require("lazy").setup({
       },
     },
   },
-})
-
-require("lazy").setup({
-  "williamboman/mason.nvim", -- For managing LSP servers
-  "williamboman/mason-lspconfig.nvim", -- To integrate mason with lspconfig
-  "neovim/nvim-lspconfig", -- For setting up LSP servers
 })
